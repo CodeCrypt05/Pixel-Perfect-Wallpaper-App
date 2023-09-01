@@ -15,12 +15,77 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(title: Text('Anime Heaven Wallpaper')),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(
+            Icons.menu,
+            size: 30.0,
+          ),
+          onPressed: () {
+            _scaffoldKey.currentState?.openDrawer(); // Open the drawer
+          },
+        ),
+        title: const Text('Anime Heaven Wallpaper'),
+        actions: const [
+          Padding(
+            padding:
+                EdgeInsets.only(right: 16.0), // Adjust the padding as needed
+            child: Icon(
+              Icons.favorite,
+            ),
+          )
+        ],
+        toolbarHeight: 70, // Adjust the height as needed
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            const UserAccountsDrawerHeader(
+              accountName: Center(
+                child: Text(
+                  'Anime Haven',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: AssetImage(
+                    'assets/images/lakes.jpg'), // Replace with your image asset
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white, // Set the background color of the header
+              ),
+              accountEmail: null,
+            ),
+            ListTile(
+              title: Text('Share App'),
+              onTap: () {
+                // Handle menu item 2 tap
+              },
+            ),
+            ListTile(
+              title: Text('Privacy Policy'),
+              onTap: () {
+                // Handle menu item 1 tap
+              },
+            ),
+            ListTile(
+              title: Text('Notification'),
+              onTap: () {
+                // Handle menu item 2 tap
+              },
+            ),
+            // Add more menu items as needed
+          ],
+        ),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -84,8 +149,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 45,
                           decoration: BoxDecoration(
                             color: current == index
-                                ? Color.fromARGB(255, 0, 0, 0)
-                                : Color.fromARGB(255, 240, 240, 240),
+                                ? const Color.fromARGB(255, 0, 0, 0)
+                                : const Color.fromARGB(255, 240, 240, 240),
                             borderRadius: current == index
                                 ? BorderRadius.circular(28)
                                 : BorderRadius.circular(28),
