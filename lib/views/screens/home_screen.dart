@@ -51,8 +51,8 @@ class _HomeScreenState extends State<HomeScreen> {
             const UserAccountsDrawerHeader(
               accountName: Center(
                 child: Text(
-                  'Anime Haven',
-                  style: TextStyle(color: Colors.black),
+                  'Anime Haven Wallpaper',
+                  style: TextStyle(color: Colors.black, fontSize: 15.0),
                 ),
               ),
               currentAccountPicture: CircleAvatar(
