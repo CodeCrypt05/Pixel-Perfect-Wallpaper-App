@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,51 +18,33 @@ class ImageDetailScreen extends StatefulWidget {
 }
 
 class _ImageDetailScreenState extends State<ImageDetailScreen> {
-  String _platformVersion = 'Unknown';
-  String __heightWidth = "Unknown";
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    initAppState();
-  }
-
-  Future<void> initAppState() async {
-    String platformVersion;
-    String _heightWidth;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    try {
-      platformVersion =
-          await WallpaperManager.platformVersion ?? 'Unknown platform version';
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    try {
-      int height = await WallpaperManager.getDesiredMinimumHeight();
-      int width = await WallpaperManager.getDesiredMinimumWidth();
-      _heightWidth =
-          "Width = " + width.toString() + " Height = " + height.toString();
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-      _heightWidth = "Failed to get Height and Width";
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      __heightWidth = _heightWidth;
-      _platformVersion = platformVersion;
-    });
+  // show progressbar on bottom sheet
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isDismissible: false,
+      builder: (BuildContext ctx) {
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  CircularProgressIndicator(),
+                  SizedBox(height: 16),
+                  Text("Setting wallpaper..."),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   // Set image as wallpaper
-  Future<void> setWallpaper(String setWallpaper) async {
+  Future<void> setWallpaper(String setWallpaper, BuildContext ctx) async {
     try {
       int? location;
       if (setWallpaper == 'setLock') {
@@ -75,36 +59,17 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
       var file = await DefaultCacheManager().getSingleFile(widget.imageUrl);
 
       // Show the progress indicator
-      bool progressVisible = true;
-      showModalBottomSheet(
-        context: context,
-        isDismissible: false,
-        builder: (BuildContext context) {
-          return StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-              return const Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    CircularProgressIndicator(),
-                    SizedBox(height: 16),
-                    Text("Setting wallpaper..."),
-                  ],
-                ),
-              );
-            },
-          );
-        },
-      );
+      _showBottomSheet(ctx);
+
       final bool result =
           await WallpaperManager.setWallpaperFromFile(file.path, location!);
 
       // Hide the progress indicator
-      Navigator.of(context).pop();
+      Navigator.of(ctx).pop();
+
       if (result) {
         await _showToast("Wallpaper set successfully");
-        await Future.delayed(Duration(seconds: 2));
+        await Future.delayed(const Duration(seconds: 3));
       } else {
         _showToast("Failed to set wallpaper");
       }
@@ -114,36 +79,37 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
   }
 
   // Bottom popup
-  void _showOptionsPopup(BuildContext context) {
+  void _showOptionsPopup(BuildContext con) {
     showModalBottomSheet<void>(
       context: context,
-      builder: (BuildContext context) {
-        return Container(
-          child: Wrap(
-            children: <Widget>[
-              ListTile(
-                leading: const Icon(Icons.screen_lock_portrait),
-                title: const Text('Set as lock screen'),
-                onTap: () {
-                  setWallpaper('setLock');
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.home),
-                title: const Text('Set as home screen'),
-                onTap: () {
-                  setWallpaper('setHome');
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.mobile_screen_share),
-                title: const Text('Set both'),
-                onTap: () {
-                  setWallpaper('setBoth');
-                },
-              ),
-            ],
-          ),
+      builder: (BuildContext ctx) {
+        return Wrap(
+          children: <Widget>[
+            ListTile(
+              leading: const Icon(Icons.screen_lock_portrait),
+              title: const Text('Set as lock screen'),
+              onTap: () {
+                setWallpaper('setLock', context);
+                Navigator.pop(con);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Set as home screen'),
+              onTap: () {
+                setWallpaper('setHome', context);
+                Navigator.pop(con);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.mobile_screen_share),
+              title: const Text('Set both'),
+              onTap: () {
+                setWallpaper('setBoth', context);
+                Navigator.pop(con);
+              },
+            ),
+          ],
         );
       },
     );
@@ -226,7 +192,7 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
                               const Color(0xFFffffff).withOpacity(0.1),
                               const Color(0xFFFFFFFF).withOpacity(0.05),
                             ],
-                            stops: [
+                            stops: const [
                               0.1,
                               1,
                             ]),
@@ -263,7 +229,7 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
                               const Color(0xFFffffff).withOpacity(0.1),
                               const Color(0xFFFFFFFF).withOpacity(0.05),
                             ],
-                            stops: [
+                            stops: const [
                               0.1,
                               1,
                             ]),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pixel_perfect_wallpaper_app/data/tabs_list.dart';
-import 'package:pixel_perfect_wallpaper_app/views/tabs/anime_tab.dart';
-import 'package:pixel_perfect_wallpaper_app/views/tabs/favorite_tab.dart';
-import 'package:pixel_perfect_wallpaper_app/views/tabs/genre_tab.dart';
-import 'package:pixel_perfect_wallpaper_app/views/tabs/trending_tab.dart';
+import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/anime_tab.dart';
+import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/favorite_tab.dart';
+import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/genre_tab.dart';
+import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/trending_tab.dart';
 import 'package:pixel_perfect_wallpaper_app/widgets/search_bar.dart';
 
 class HomeScreen extends StatefulWidget {
