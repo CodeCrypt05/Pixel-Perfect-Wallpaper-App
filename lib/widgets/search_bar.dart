@@ -10,7 +10,7 @@ class SearchBarWidget extends StatefulWidget {
 class _SearchBarWidgetState extends State<SearchBarWidget> {
   final TextEditingController _searchController = TextEditingController();
   late FocusNode _focusNode;
-  bool _isTextFieldFocused = false;
+  bool _isTextFieldFocused = true;
 
   @override
   void initState() {
@@ -54,8 +54,6 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
             child: GestureDetector(
               onTap: _closeKeyboardAndUnfocus,
               child: TextField(
-                showCursor: _isTextFieldFocused,
-                autofocus: _isTextFieldFocused,
                 controller: _searchController,
                 decoration: const InputDecoration(
                   hintText: "Search Wallpapers",

@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
+          SizedBox(
             width: size.width,
             height: size.height * 0.06,
             child: SearchBarWidget(),
@@ -123,14 +123,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget tabs(Size size) {
     return Container(
       width: size.width,
-      height: size.height * 0.07,
+      height: size.height * 0.078,
       margin: const EdgeInsets.only(left: 18, right: 18),
       child: Column(
         children: [
           /// CUSTOM TABBAR
           SizedBox(
             width: size.width,
-            height: size.height * 0.07,
+            height: size.height * 0.064,
             child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 itemCount: items.length,
