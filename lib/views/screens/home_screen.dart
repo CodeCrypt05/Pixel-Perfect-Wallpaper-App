@@ -52,7 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
               accountName: Center(
                 child: Text(
                   'Anime Haven Wallpaper',
-                  style: TextStyle(color: Colors.black, fontSize: 15.0),
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
               currentAccountPicture: CircleAvatar(
