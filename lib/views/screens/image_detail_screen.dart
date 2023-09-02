@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +5,8 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pixel_perfect_wallpaper_app/widgets/show_toast.dart';
+import 'package:pixel_perfect_wallpaper_app/functions/download_wallpaper.dart';
 
 class ImageDetailScreen extends StatefulWidget {
   const ImageDetailScreen({super.key, required this.imageUrl});
@@ -18,6 +17,9 @@ class ImageDetailScreen extends StatefulWidget {
 }
 
 class _ImageDetailScreenState extends State<ImageDetailScreen> {
+  ShowToast toast = const ShowToast();
+  DownloadWallpaper downloadWallpaper = DownloadWallpaper();
+
   // show progressbar on bottom sheet
   void _showBottomSheet(BuildContext context) {
     showModalBottomSheet(
@@ -68,10 +70,10 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
       Navigator.of(ctx).pop();
 
       if (result) {
-        await _showToast("Wallpaper set successfully");
+        await toast.showToast("Wallpaper set successfully");
         await Future.delayed(const Duration(seconds: 3));
       } else {
-        _showToast("Failed to set wallpaper");
+        toast.showToast("Failed to set wallpaper");
       }
     } on PlatformException catch (e) {
       print("Error setting wallpaper: ${e.message}");
@@ -140,6 +142,9 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
                   children: [
                     // download btn
                     GestureDetector(
+                      onTap: () {
+                        downloadWallpaper.downloadAndSaveImage(widget.imageUrl);
+                      },
                       child: GlassmorphicContainer(
                         alignment: Alignment.center,
                         width: 60,
@@ -253,18 +258,6 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
           ),
         ],
       ),
-    );
-  }
-
-  // Toast Message
-  Future<bool?> _showToast(String msg) {
-    return Fluttertoast.showToast(
-      msg: msg,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.green,
-      textColor: Colors.white,
     );
   }
 }
