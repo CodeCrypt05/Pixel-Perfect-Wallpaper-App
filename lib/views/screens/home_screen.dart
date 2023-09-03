@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pixel_perfect_wallpaper_app/data/tabs_list.dart';
-import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/anime_tab.dart';
-import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/favorite_tab.dart';
-import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/genre_tab.dart';
+import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/all_collectio.dart';
+import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/animal_collection_tab.dart';
+import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/art_collection_tab.dart';
+import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/creative_collection_tab.dart';
+import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/nature_collection_tab.dart';
 import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/trending_tab.dart';
 import 'package:pixel_perfect_wallpaper_app/widgets/search_bar.dart';
 
@@ -111,11 +113,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget displayScreens() {
     if (current == 1) {
-      return const AnimeTab();
+      return const CreativeCollectionTab();
     } else if (current == 2) {
-      return const GenreTab();
+      return const NatureCollectionTab();
     } else if (current == 3) {
-      return const FavoriteTab();
+      return const AnimalCollectionTab();
+    } else if (current == 4) {
+      return const ArtCollectioDart();
+    } else if (current == 5) {
+      return const AllCollections();
     }
     return const TrendingTab();
   }

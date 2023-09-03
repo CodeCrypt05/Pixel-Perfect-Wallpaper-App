@@ -41,12 +41,12 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20, bottom: 8),
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.only(left: 20, right: 20, bottom: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       height: 10,
       width: 100,
       decoration: BoxDecoration(
-          color: Color.fromARGB(255, 240, 240, 240),
+          color: const Color.fromARGB(255, 240, 240, 240),
           borderRadius: BorderRadius.circular(25)),
       child: Row(
         children: [
@@ -78,7 +78,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                 //   ),
                 // );
               },
-              child: Icon(Icons.search))
+              child: const Icon(Icons.search))
         ],
       ),
     );

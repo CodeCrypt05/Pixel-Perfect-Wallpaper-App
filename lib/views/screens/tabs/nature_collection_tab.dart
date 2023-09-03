@@ -4,29 +4,29 @@ import 'package:pixel_perfect_wallpaper_app/models/photos_model.dart';
 import 'package:pixel_perfect_wallpaper_app/services/fetch_images.dart';
 import 'package:pixel_perfect_wallpaper_app/views/screens/error_screen.dart';
 
-class TrendingTab extends StatefulWidget {
-  const TrendingTab({super.key});
+class NatureCollectionTab extends StatefulWidget {
+  const NatureCollectionTab({super.key});
 
   @override
-  State<TrendingTab> createState() => _TrendingTabState();
+  State<NatureCollectionTab> createState() => _NatureCollectionTabState();
 }
 
-class _TrendingTabState extends State<TrendingTab> {
+class _NatureCollectionTabState extends State<NatureCollectionTab> {
   final OpenImage openImage = OpenImage();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<PhotosModel>>(
-      future: getRandomPhotosAPI(),
+      future: getTabPhotosAPI('Nature'),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         } else if (snapshot.hasError) {
-          return ErrorScreen();
+          return const ErrorScreen();
         } else {
           return Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisSpacing: 13,

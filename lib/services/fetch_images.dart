@@ -24,3 +24,24 @@ Future<List<PhotosModel>> getRandomPhotosAPI() async {
     return photoList;
   }
 }
+
+// Tabs Category Images
+Future<List<PhotosModel>> getTabPhotosAPI(String query) async {
+  final url = Uri.parse(
+      'https://api.pexels.com/v1/search?query=$query?per_page=80&page=1');
+  final headers = {"Authorization": authorization};
+
+  final response = await http.get(url, headers: headers);
+  Map<String, dynamic> data = jsonDecode(response.body);
+
+  if (response.statusCode == 200) {
+    List photos = data['photos'];
+    photoList.clear();
+    photos.forEach((element) {
+      photoList.add(PhotosModel.fromJson(element));
+    });
+    return photoList;
+  } else {
+    return photoList;
+  }
+}
