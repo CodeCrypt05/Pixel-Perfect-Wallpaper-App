@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pixel_perfect_wallpaper_app/functions/open_image.dart';
 import 'package:pixel_perfect_wallpaper_app/models/photos_model.dart';
 import 'package:pixel_perfect_wallpaper_app/services/fetch_images.dart';
-import 'package:pixel_perfect_wallpaper_app/views/screens/error_screen.dart';
+import 'package:pixel_perfect_wallpaper_app/widgets/no_internet_connection.dart';
 
 class NatureCollectionTab extends StatefulWidget {
   const NatureCollectionTab({super.key});
@@ -13,10 +13,11 @@ class NatureCollectionTab extends StatefulWidget {
 
 class _NatureCollectionTabState extends State<NatureCollectionTab> {
   final OpenImage openImage = OpenImage();
+  FetchImage fetchImage = FetchImage();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<PhotosModel>>(
-      future: getTabPhotosAPI('Nature'),
+      future: fetchImage.getTabPhotosAPI('Nature'),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(

@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             width: size.width,
             height: size.height * 0.06,
-            child: SearchBarWidget(),
+            child: const SearchBarWidget(),
             // color: Colors.amber,
           ),
           tabs(size),

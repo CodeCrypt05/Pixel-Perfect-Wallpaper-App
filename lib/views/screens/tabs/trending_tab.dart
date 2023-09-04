@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pixel_perfect_wallpaper_app/functions/open_image.dart';
 import 'package:pixel_perfect_wallpaper_app/models/photos_model.dart';
 import 'package:pixel_perfect_wallpaper_app/services/fetch_images.dart';
-import 'package:pixel_perfect_wallpaper_app/views/screens/error_screen.dart';
+import 'package:pixel_perfect_wallpaper_app/widgets/no_internet_connection.dart';
 
 class TrendingTab extends StatefulWidget {
   const TrendingTab({super.key});
@@ -13,20 +13,21 @@ class TrendingTab extends StatefulWidget {
 
 class _TrendingTabState extends State<TrendingTab> {
   final OpenImage openImage = OpenImage();
+  FetchImage fetchImage = FetchImage();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<PhotosModel>>(
-      future: getRandomPhotosAPI(),
+      future: fetchImage.getRandomPhotosAPI(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         } else if (snapshot.hasError) {
-          return ErrorScreen();
+          return const ErrorScreen();
         } else {
           return Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisSpacing: 13,

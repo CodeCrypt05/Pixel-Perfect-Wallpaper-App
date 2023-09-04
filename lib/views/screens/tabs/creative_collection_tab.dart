@@ -4,7 +4,7 @@ import 'package:pixel_perfect_wallpaper_app/data/tabs_list.dart';
 import 'package:pixel_perfect_wallpaper_app/functions/open_image.dart';
 import 'package:pixel_perfect_wallpaper_app/models/photos_model.dart';
 import 'package:pixel_perfect_wallpaper_app/services/fetch_images.dart';
-import 'package:pixel_perfect_wallpaper_app/views/screens/error_screen.dart';
+import 'package:pixel_perfect_wallpaper_app/widgets/no_internet_connection.dart';
 
 class CreativeCollectionTab extends StatefulWidget {
   const CreativeCollectionTab({super.key});
@@ -15,10 +15,11 @@ class CreativeCollectionTab extends StatefulWidget {
 
 class _CreativeCollectionTabState extends State<CreativeCollectionTab> {
   final OpenImage openImage = OpenImage();
+  FetchImage fetchImage = FetchImage();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<PhotosModel>>(
-      future: getTabPhotosAPI('creative'),
+      future: fetchImage.getTabPhotosAPI('creative'),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(

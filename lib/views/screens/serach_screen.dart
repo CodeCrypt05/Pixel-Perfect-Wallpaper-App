@@ -1,23 +1,40 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:pixel_perfect_wallpaper_app/functions/open_image.dart';
 import 'package:pixel_perfect_wallpaper_app/models/photos_model.dart';
 import 'package:pixel_perfect_wallpaper_app/services/fetch_images.dart';
 import 'package:pixel_perfect_wallpaper_app/widgets/no_internet_connection.dart';
 
-class AnimalCollectionTab extends StatefulWidget {
-  const AnimalCollectionTab({super.key});
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key, required this.query});
+  final String query;
 
   @override
-  State<AnimalCollectionTab> createState() => _AnimalCollectionTabState();
+  State<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _AnimalCollectionTabState extends State<AnimalCollectionTab> {
+class _SearchScreenState extends State<SearchScreen> {
   final OpenImage openImage = OpenImage();
+  late List<PhotosModel> searchResult;
   FetchImage fetchImage = FetchImage();
+
+  void getSearchWallPapers(String query) async {
+    searchResult = await fetchImage.getTabPhotosAPI(query);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getSearchWallPapers(widget.query);
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<PhotosModel>>(
-      future: fetchImage.getTabPhotosAPI('animal'),
+      future: fetchImage.getTabPhotosAPI(widget.query),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
@@ -52,7 +69,7 @@ class _AnimalCollectionTabState extends State<AnimalCollectionTab> {
                           image: DecorationImage(
                             fit: BoxFit.cover,
                             image: NetworkImage(
-                                snapshot.data![index].portrait.toString()),
+                                searchResult[index].portrait.toString()),
                           ),
                         ),
                       ),
