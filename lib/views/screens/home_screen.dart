@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
             _scaffoldKey.currentState?.openDrawer(); // Open the drawer
           },
         ),
-        title: const Text('Anime Heaven Wallpaper'),
+        title: const Text('Pixel Perfect Wallpaper'),
         actions: const [
           Padding(
             padding:
@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const UserAccountsDrawerHeader(
               accountName: Center(
                 child: Text(
-                  'Anime Haven Wallpaper',
+                  'Pixel Perfect Wallpaper',
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 20.0,
