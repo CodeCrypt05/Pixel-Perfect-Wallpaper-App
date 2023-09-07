@@ -5,15 +5,15 @@ import 'package:pixel_perfect_wallpaper_app/services/fetch_images.dart';
 import 'package:pixel_perfect_wallpaper_app/widgets/no_internet_connection.dart';
 import 'package:pixel_perfect_wallpaper_app/widgets/search_bar.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchResultScreen extends StatefulWidget {
   final String searchQuery;
-  const SearchScreen({super.key, required this.searchQuery});
+  const SearchResultScreen({super.key, required this.searchQuery});
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  State<SearchResultScreen> createState() => _SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class _SearchScreenState extends State<SearchResultScreen> {
   final OpenImage openImage = OpenImage();
   late List<PhotosModel> searchResult;
   FetchImage fetchImage = FetchImage();

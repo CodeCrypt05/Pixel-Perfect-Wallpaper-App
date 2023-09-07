@@ -7,6 +7,7 @@ import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/art_collection_ta
 import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/creative_collection_tab.dart';
 import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/nature_collection_tab.dart';
 import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/trending_tab.dart';
+import 'package:pixel_perfect_wallpaper_app/widgets/main_drawer.dart';
 import 'package:pixel_perfect_wallpaper_app/widgets/search_bar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -46,51 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         toolbarHeight: 70, // Adjust the height as needed
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            const UserAccountsDrawerHeader(
-              accountName: Center(
-                child: Text(
-                  'Pixel Perfect Wallpaper',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage(
-                    'assets/images/lakes.jpg'), // Replace with your image asset
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white, // Set the background color of the header
-              ),
-              accountEmail: null,
-            ),
-            ListTile(
-              title: Text('Share App'),
-              onTap: () {
-                // Handle menu item 2 tap
-              },
-            ),
-            ListTile(
-              title: Text('Privacy Policy'),
-              onTap: () {
-                // Handle menu item 1 tap
-              },
-            ),
-            ListTile(
-              title: Text('Notification'),
-              onTap: () {
-                // Handle menu item 2 tap
-              },
-            ),
-            // Add more menu items as needed
-          ],
-        ),
-      ),
+      drawer: const NavigationDrawer(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -184,4 +141,67 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+}
+
+class NavigationDrawer extends StatelessWidget {
+  const NavigationDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context) => Drawer(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              buildHeader(context),
+              buildMenu(context),
+            ],
+          ),
+        ),
+      );
+
+  Widget buildHeader(BuildContext context) => Container(
+        color: Colors.white,
+        padding: EdgeInsets.only(
+          top: 24 + MediaQuery.of(context).padding.top,
+          bottom: 24,
+        ),
+        child: const Column(
+          children: [
+            CircleAvatar(
+              radius: 52,
+              backgroundImage: AssetImage("assets/images/lakes.jpg"),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "Pixel Perfect Wallpaper",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      );
+
+  Widget buildMenu(BuildContext context) => Column(
+        children: [
+          ListTile(
+            leading: const Icon(Icons.share),
+            title: const Text('Share App'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(Icons.privacy_tip_outlined),
+            title: const Text('Privacy Policy'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(Icons.notification_add_outlined),
+            title: const Text('Notification'),
+            onTap: () {},
+          ),
+        ],
+      );
 }

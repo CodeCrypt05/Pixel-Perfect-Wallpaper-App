@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pixel_perfect_wallpaper_app/views/screens/serach_screen.dart';
+import 'package:pixel_perfect_wallpaper_app/views/screens/serach_result_screen.dart';
 
 class SearchBarWidget extends StatefulWidget {
   const SearchBarWidget({super.key});
@@ -17,7 +17,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SearchScreen(
+        builder: (context) => SearchResultScreen(
           searchQuery: searchQuery,
         ),
       ),

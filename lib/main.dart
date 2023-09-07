@@ -13,11 +13,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    const customColorScheme = ColorScheme.light(
+      primary: Colors.blue, // Example primary color
+      secondary: Colors.green, // Example secondary color
+      background: Colors.white, // Pure white background color
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: customColorScheme,
         useMaterial3: true,
       ),
       home: const HomeScreen(),
