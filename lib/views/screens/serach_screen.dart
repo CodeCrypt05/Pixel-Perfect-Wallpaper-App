@@ -1,14 +1,13 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:pixel_perfect_wallpaper_app/functions/open_image.dart';
 import 'package:pixel_perfect_wallpaper_app/models/photos_model.dart';
 import 'package:pixel_perfect_wallpaper_app/services/fetch_images.dart';
 import 'package:pixel_perfect_wallpaper_app/widgets/no_internet_connection.dart';
+import 'package:pixel_perfect_wallpaper_app/widgets/search_bar.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key, required this.query});
-  final String query;
+  final String searchQuery;
+  const SearchScreen({super.key, required this.searchQuery});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -18,23 +17,53 @@ class _SearchScreenState extends State<SearchScreen> {
   final OpenImage openImage = OpenImage();
   late List<PhotosModel> searchResult;
   FetchImage fetchImage = FetchImage();
+  bool isLoading = true;
 
-  void getSearchWallPapers(String query) async {
-    searchResult = await fetchImage.getTabPhotosAPI(query);
-    setState(() {});
+  void getSearchWallPapers() async {
+    searchResult = await fetchImage.getTabPhotosAPI(widget.searchQuery);
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getSearchWallPapers(widget.query);
+    getSearchWallPapers();
   }
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Search'),
+      ),
+      body: Column(
+        children: [
+          SizedBox(
+            width: size.width,
+            height: size.height * 0.06,
+            child: const SearchBarWidget(),
+            // color: Colors.amber,
+          ),
+          isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Flexible(
+                  flex: 99,
+                  child: _searchResult(context),
+                ),
+        ],
+      ),
+    );
+  }
+
+  FutureBuilder<List<PhotosModel>> _searchResult(BuildContext context) {
     return FutureBuilder<List<PhotosModel>>(
-      future: fetchImage.getTabPhotosAPI(widget.query),
+      future: fetchImage.getTabPhotosAPI(widget.searchQuery),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
@@ -69,7 +98,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           image: DecorationImage(
                             fit: BoxFit.cover,
                             image: NetworkImage(
-                                searchResult[index].portrait.toString()),
+                                snapshot.data![index].portrait.toString()),
                           ),
                         ),
                       ),
