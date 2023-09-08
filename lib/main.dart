@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const customColorScheme = ColorScheme.light(
-      primary: Colors.blue, // Example primary color
-      secondary: Colors.green, // Example secondary color
+      primary: Color.fromARGB(255, 255, 255, 255), // Example primary color
+      secondary: Color.fromARGB(255, 255, 255, 255), // Example secondary color
       background: Colors.white, // Pure white background color
     );
     return MaterialApp(

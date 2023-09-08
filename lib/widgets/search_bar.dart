@@ -43,6 +43,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                 searchController.clear();
               },
               controller: searchController,
+              cursorColor: const Color.fromARGB(255, 37, 37, 37),
               decoration: const InputDecoration(
                 hintText: "Search Wallpapers",
                 hintStyle: TextStyle(color: Colors.grey),

@@ -7,7 +7,6 @@ import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/art_collection_ta
 import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/creative_collection_tab.dart';
 import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/nature_collection_tab.dart';
 import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/trending_tab.dart';
-import 'package:pixel_perfect_wallpaper_app/widgets/main_drawer.dart';
 import 'package:pixel_perfect_wallpaper_app/widgets/search_bar.dart';
 
 class HomeScreen extends StatefulWidget {
