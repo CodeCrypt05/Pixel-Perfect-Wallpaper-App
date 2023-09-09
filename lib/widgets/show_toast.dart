@@ -10,13 +10,13 @@ class ShowToast extends StatelessWidget {
   }
 
   // Toast Message
-  Future<void> showToast(String msg) {
+  Future<bool?> showToast(String msg) {
     return Fluttertoast.showToast(
       msg: msg,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
-      backgroundColor: Colors.green,
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       textColor: Colors.white,
     );
   }

@@ -137,123 +137,125 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.only(bottom: 54.0),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    // download btn
-                    GestureDetector(
-                      onTap: () {
-                        downloadWallpaper.downloadAndSaveImage(widget.imageUrl);
-                      },
-                      child: GlassmorphicContainer(
-                        alignment: Alignment.center,
-                        width: 60,
-                        height: 60,
-                        borderRadius: 60,
-                        blur: 2,
-                        border: 1,
-                        linearGradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              const Color(0xFFffffff).withOpacity(0.1),
-                              const Color(0xFFFFFFFF).withOpacity(0.05),
-                            ],
-                            stops: const [
-                              0.1,
-                              1,
-                            ]),
-                        borderGradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            const Color(0xFFffffff).withOpacity(0.5),
-                            const Color((0xFFFFFFFF)).withOpacity(0.5),
-                          ],
-                        ),
-                        child: const Icon(
-                          Icons.download_rounded,
-                          size: 32,
-                          color: Colors.white,
-                        ),
-                      ),
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                // download btn
+                GestureDetector(
+                  onTap: () {
+                    downloadWallpaper.downloadAndSaveImage(widget.imageUrl);
+                  },
+                  child: GlassmorphicContainer(
+                    alignment: Alignment.center,
+                    width: 60,
+                    height: 60,
+                    borderRadius: 60,
+                    blur: 2,
+                    border: 1,
+                    linearGradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          const Color(0xFFffffff).withOpacity(0.1),
+                          const Color(0xFFFFFFFF).withOpacity(0.05),
+                        ],
+                        stops: const [
+                          0.1,
+                          1,
+                        ]),
+                    borderGradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        const Color(0xFFffffff).withOpacity(0.5),
+                        const Color((0xFFFFFFFF)).withOpacity(0.5),
+                      ],
                     ),
-                    // apply btn
-                    GestureDetector(
-                      onTap: () {
-                        _showOptionsPopup(context);
-                      },
-                      child: GlassmorphicContainer(
-                        alignment: Alignment.center,
-                        width: 160,
-                        height: 48,
-                        borderRadius: 24,
-                        blur: 2,
-                        border: 1,
-                        linearGradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              const Color(0xFFffffff).withOpacity(0.1),
-                              const Color(0xFFFFFFFF).withOpacity(0.05),
-                            ],
-                            stops: const [
-                              0.1,
-                              1,
-                            ]),
-                        borderGradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            const Color(0xFFffffff).withOpacity(0.5),
-                            const Color((0xFFFFFFFF)).withOpacity(0.5),
-                          ],
-                        ),
-                        child: Text(
-                          'Apply',
-                          style: GoogleFonts.roboto(
-                              fontWeight: FontWeight.w300,
-                              fontSize: 22,
-                              color: const Color.fromARGB(255, 255, 255, 255)),
-                        ),
-                      ),
+                    child: const Icon(
+                      Icons.download_rounded,
+                      size: 32,
+                      color: Colors.white,
                     ),
-                    //favorite btn
-                    GestureDetector(
-                      child: GlassmorphicContainer(
-                        alignment: Alignment.center,
-                        width: 60,
-                        height: 60,
-                        borderRadius: 60,
-                        blur: 2,
-                        border: 1,
-                        linearGradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              const Color(0xFFffffff).withOpacity(0.1),
-                              const Color(0xFFFFFFFF).withOpacity(0.05),
-                            ],
-                            stops: const [
-                              0.1,
-                              1,
-                            ]),
-                        borderGradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            const Color(0xFFffffff).withOpacity(0.5),
-                            const Color((0xFFFFFFFF)).withOpacity(0.5),
-                          ],
-                        ),
-                        child: const Icon(
-                          Icons.favorite,
-                          size: 32,
-                          color: Colors.white,
-                        ),
-                      ),
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                // apply btn
+                GestureDetector(
+                  onTap: () {
+                    _showOptionsPopup(context);
+                  },
+                  child: GlassmorphicContainer(
+                    alignment: Alignment.center,
+                    width: 120,
+                    height: 48,
+                    borderRadius: 24,
+                    blur: 2,
+                    border: 1,
+                    linearGradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          const Color(0xFFffffff).withOpacity(0.1),
+                          const Color(0xFFFFFFFF).withOpacity(0.05),
+                        ],
+                        stops: const [
+                          0.1,
+                          1,
+                        ]),
+                    borderGradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        const Color(0xFFffffff).withOpacity(0.5),
+                        const Color((0xFFFFFFFF)).withOpacity(0.5),
+                      ],
                     ),
-                  ]),
+                    child: Text(
+                      'Apply',
+                      style: GoogleFonts.roboto(
+                          fontWeight: FontWeight.w300,
+                          fontSize: 22,
+                          color: const Color.fromARGB(255, 255, 255, 255)),
+                    ),
+                  ),
+                ),
+                //favorite btn
+                // GestureDetector(
+                //   child: GlassmorphicContainer(
+                //     alignment: Alignment.center,
+                //     width: 60,
+                //     height: 60,
+                //     borderRadius: 60,
+                //     blur: 2,
+                //     border: 1,
+                //     linearGradient: LinearGradient(
+                //         begin: Alignment.topLeft,
+                //         end: Alignment.bottomRight,
+                //         colors: [
+                //           const Color(0xFFffffff).withOpacity(0.1),
+                //           const Color(0xFFFFFFFF).withOpacity(0.05),
+                //         ],
+                //         stops: const [
+                //           0.1,
+                //           1,
+                //         ]),
+                //     borderGradient: LinearGradient(
+                //       begin: Alignment.topLeft,
+                //       end: Alignment.bottomRight,
+                //       colors: [
+                //         const Color(0xFFffffff).withOpacity(0.5),
+                //         const Color((0xFFFFFFFF)).withOpacity(0.5),
+                //       ],
+                //     ),
+                //     child: const Icon(
+                //       Icons.favorite,
+                //       size: 32,
+                //       color: Colors.white,
+                //     ),
+                //   ),
+                // ),
+              ]),
             ),
           ),
         ],

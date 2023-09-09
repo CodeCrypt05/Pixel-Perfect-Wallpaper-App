@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pixel_perfect_wallpaper_app/functions/open_image.dart';
-import 'package:pixel_perfect_wallpaper_app/models/photos_model.dart';
+import 'package:pixel_perfect_wallpaper_app/models/search_images_model.dart';
 import 'package:pixel_perfect_wallpaper_app/services/fetch_images.dart';
 import 'package:pixel_perfect_wallpaper_app/widgets/no_internet_connection.dart';
 import 'package:pixel_perfect_wallpaper_app/widgets/search_bar.dart';
+import 'package:pixel_perfect_wallpaper_app/widgets/shimmer_effect.dart';
 
 class SearchResultScreen extends StatefulWidget {
   final String searchQuery;
@@ -15,7 +16,7 @@ class SearchResultScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchResultScreen> {
   final OpenImage openImage = OpenImage();
-  late List<PhotosModel> searchResult;
+  late List<SearchImagesModel> searchResult;
   FetchImage fetchImage = FetchImage();
   bool isLoading = true;
 
@@ -36,38 +37,44 @@ class _SearchScreenState extends State<SearchResultScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Search'),
-      ),
-      body: Column(
-        children: [
-          SizedBox(
-            width: size.width,
-            height: size.height * 0.06,
-            child: const SearchBarWidget(),
-            // color: Colors.amber,
-          ),
-          isLoading
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : Flexible(
-                  flex: 99,
-                  child: _searchResult(context),
-                ),
-        ],
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Search'),
+        ),
+        body: Column(
+          children: [
+            SizedBox(
+              width: size.width,
+              height: size.height * 0.06,
+              child: const SearchBarWidget(),
+              // color: Colors.amber,
+            ),
+            isLoading
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Flexible(
+                    flex: 99,
+                    child: _searchResult(context),
+                  ),
+          ],
+        ),
       ),
     );
   }
 
-  FutureBuilder<List<PhotosModel>> _searchResult(BuildContext context) {
-    return FutureBuilder<List<PhotosModel>>(
+  FutureBuilder<List<SearchImagesModel>> _searchResult(BuildContext context) {
+    return FutureBuilder<List<SearchImagesModel>>(
       future: fetchImage.getTabPhotosAPI(widget.searchQuery),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: ShimmerEffect(),
           );
         } else if (snapshot.hasError) {
           return const ErrorScreen();
@@ -83,8 +90,9 @@ class _SearchScreenState extends State<SearchResultScreen> {
               ),
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
+                // final imageUrl = image['src']['medium'];
                 return Hero(
-                  tag: snapshot.data![index].portrait.toString(),
+                  tag: snapshot.data![index].src.toString(),
                   child: GestureDetector(
                     onTap: () {
                       openImage.openImage(context, snapshot, index);
@@ -98,7 +106,7 @@ class _SearchScreenState extends State<SearchResultScreen> {
                           image: DecorationImage(
                             fit: BoxFit.cover,
                             image: NetworkImage(
-                                snapshot.data![index].portrait.toString()),
+                                snapshot.data![index].src.toString()),
                           ),
                         ),
                       ),

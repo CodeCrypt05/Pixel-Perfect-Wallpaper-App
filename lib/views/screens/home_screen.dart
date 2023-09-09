@@ -35,15 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         title: const Text('Pixel Perfect Wallpaper'),
-        actions: const [
-          Padding(
-            padding:
-                EdgeInsets.only(right: 16.0), // Adjust the padding as needed
-            child: Icon(
-              Icons.favorite,
-            ),
-          )
-        ],
         toolbarHeight: 70, // Adjust the height as needed
       ),
       drawer: const NavigationDrawer(),
@@ -168,7 +159,7 @@ class NavigationDrawer extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 52,
-              backgroundImage: AssetImage("assets/images/lakes.jpg"),
+              backgroundImage: AssetImage("assets/images/logo.png"),
             ),
             SizedBox(
               height: 10,

@@ -3,6 +3,7 @@ import 'package:pixel_perfect_wallpaper_app/functions/open_image.dart';
 import 'package:pixel_perfect_wallpaper_app/models/photos_model.dart';
 import 'package:pixel_perfect_wallpaper_app/services/fetch_images.dart';
 import 'package:pixel_perfect_wallpaper_app/widgets/no_internet_connection.dart';
+import 'package:pixel_perfect_wallpaper_app/widgets/shimmer_effect.dart';
 
 class TrendingTab extends StatefulWidget {
   const TrendingTab({super.key});
@@ -20,9 +21,7 @@ class _TrendingTabState extends State<TrendingTab> {
       future: fetchImage.getRandomPhotosAPI(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const ShimmerEffect();
         } else if (snapshot.hasError) {
           return const ErrorScreen();
         } else {

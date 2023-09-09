@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:pixel_perfect_wallpaper_app/models/photos_model.dart';
+import 'package:pixel_perfect_wallpaper_app/models/search_images_model.dart';
 
 class FetchImage {
   String authorization = dotenv.env['AUTH_KEY']!;
@@ -28,7 +29,8 @@ class FetchImage {
   }
 
 // Tabs Category Images
-  Future<List<PhotosModel>> getTabPhotosAPI(String query) async {
+  List<SearchImagesModel> photoSearchList = [];
+  Future<List<SearchImagesModel>> getTabPhotosAPI(String query) async {
     final url = Uri.parse(
         'https://api.pexels.com/v1/search?query=$query?per_page=80&page=1');
     final headers = {"Authorization": authorization};
@@ -37,14 +39,11 @@ class FetchImage {
     Map<String, dynamic> data = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-      List photos = data['photos'];
-      photoList.clear();
-      photos.forEach((element) {
-        photoList.add(PhotosModel.fromJson(element));
-      });
-      return photoList;
+      final data = json.decode(response.body);
+      final photos = data['photos'] as List<dynamic>;
+      return photos.map((json) => SearchImagesModel.fromJson(json)).toList();
     } else {
-      return photoList;
+      throw Exception('Failed to load images');
     }
   }
 }
