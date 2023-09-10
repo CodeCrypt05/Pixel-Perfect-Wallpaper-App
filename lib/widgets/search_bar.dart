@@ -19,7 +19,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   onSearch(BuildContext context) {
     final isValid = _form.currentState!.validate();
     searchQuery = searchController.text;
-    if (!isValid) {
+    if (isValid) {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -79,7 +79,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                   border: InputBorder.none,
                 ),
                 validator: (value) {
-                  if (value == null || value.trim().length < 3) {
+                  if (value == null || value.trim().length < 2) {
                     return _validateSearch(value!);
                   }
                   return null;

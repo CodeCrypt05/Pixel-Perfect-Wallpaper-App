@@ -32,7 +32,7 @@ class FetchImage {
   List<SearchImagesModel> photoSearchList = [];
   Future<List<SearchImagesModel>> getTabPhotosAPI(String query) async {
     final url = Uri.parse(
-        'https://api.pexels.com/v1/search?query=$query?per_page=80&page=1');
+        'https://api.pexels.com/v1/search?query=$query&per_page=80&page=1');
     final headers = {"Authorization": authorization};
 
     final response = await http.get(url, headers: headers);

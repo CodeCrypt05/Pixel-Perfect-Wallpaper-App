@@ -178,18 +178,23 @@ class NavigationDrawer extends StatelessWidget {
   Widget buildMenu(BuildContext context) => Column(
         children: [
           ListTile(
-            leading: const Icon(Icons.share),
+            leading: const Icon(Icons.star_border_outlined),
+            title: const Text('Rate This App'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(Icons.share_outlined),
             title: const Text('Share App'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(Icons.info_outline),
+            title: const Text('About Us'),
             onTap: () {},
           ),
           ListTile(
             leading: const Icon(Icons.privacy_tip_outlined),
             title: const Text('Privacy Policy'),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: const Icon(Icons.notification_add_outlined),
-            title: const Text('Notification'),
             onTap: () {},
           ),
         ],
