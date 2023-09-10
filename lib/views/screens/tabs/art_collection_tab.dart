@@ -26,6 +26,7 @@ class _ArtCollectioDartState extends State<ArtCollectioDart> {
         } else if (snapshot.hasError) {
           return const ErrorScreen();
         } else {
+          final images = snapshot.data!;
           return Container(
             margin: const EdgeInsets.symmetric(horizontal: 10),
             child: GridView.builder(
@@ -37,11 +38,12 @@ class _ArtCollectioDartState extends State<ArtCollectioDart> {
               ),
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
+                final imageUrl = images[index].src;
                 return Hero(
-                  tag: snapshot.data![index].src.toString(),
+                  tag: imageUrl,
                   child: GestureDetector(
                     onTap: () {
-                      openImage.openImage(context, snapshot, index);
+                      openImage.openImage(context, snapshot, index, imageUrl);
                     },
                     child: GridTile(
                       child: Container(
@@ -51,8 +53,7 @@ class _ArtCollectioDartState extends State<ArtCollectioDart> {
                           borderRadius: BorderRadius.circular(20),
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage(
-                                snapshot.data![index].src.toString()),
+                            image: NetworkImage(imageUrl),
                           ),
                         ),
                       ),
