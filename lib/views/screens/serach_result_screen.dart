@@ -3,6 +3,7 @@ import 'package:pixel_perfect_wallpaper_app/functions/open_image.dart';
 import 'package:pixel_perfect_wallpaper_app/models/search_images_model.dart';
 import 'package:pixel_perfect_wallpaper_app/services/fetch_images.dart';
 import 'package:pixel_perfect_wallpaper_app/widgets/no_internet_connection.dart';
+import 'package:pixel_perfect_wallpaper_app/widgets/no_result_found.dart';
 import 'package:pixel_perfect_wallpaper_app/widgets/search_bar.dart';
 import 'package:pixel_perfect_wallpaper_app/widgets/shimmer_effect.dart';
 
@@ -76,8 +77,8 @@ class _SearchScreenState extends State<SearchResultScreen> {
           return const Center(
             child: ShimmerEffect(),
           );
-        } else if (snapshot.hasError) {
-          return const ErrorScreen();
+        } else if (snapshot.hasError || snapshot.data!.isEmpty) {
+          return const NoResultFound();
         } else {
           final images = snapshot.data!;
           return Container(
