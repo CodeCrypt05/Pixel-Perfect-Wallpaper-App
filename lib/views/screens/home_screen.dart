@@ -7,7 +7,9 @@ import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/art_collection_ta
 import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/creative_collection_tab.dart';
 import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/nature_collection_tab.dart';
 import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/trending_tab.dart';
+import 'package:pixel_perfect_wallpaper_app/widgets/main_drawer.dart';
 import 'package:pixel_perfect_wallpaper_app/widgets/search_bar.dart';
+import 'package:share_plus/share_plus.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,7 +25,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       key: _scaffoldKey,
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(
@@ -34,10 +35,10 @@ class _HomeScreenState extends State<HomeScreen> {
             _scaffoldKey.currentState?.openDrawer(); // Open the drawer
           },
         ),
-        title: const Text('Pixel Perfect Wallpaper'),
+        title: const Text('Pixel Perfect Wallpapers'),
         toolbarHeight: 70, // Adjust the height as needed
       ),
-      drawer: const NavigationDrawer(),
+      drawer: const MainDrawer(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -185,7 +186,10 @@ class NavigationDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.share_outlined),
             title: const Text('Share App'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pop(context);
+              Share.share("Here you have to put your app link");
+            },
           ),
           ListTile(
             leading: const Icon(Icons.info_outline),
