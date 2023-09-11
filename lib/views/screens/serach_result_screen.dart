@@ -21,7 +21,7 @@ class _SearchScreenState extends State<SearchResultScreen> {
   bool isLoading = true;
 
   void getSearchWallPapers() async {
-    searchResult = await fetchImage.getTabPhotosAPI(widget.searchQuery);
+    searchResult = await fetchImage.getSearchPhotosAPI(widget.searchQuery);
     setState(() {
       isLoading = false;
     });
@@ -70,7 +70,7 @@ class _SearchScreenState extends State<SearchResultScreen> {
 
   FutureBuilder<List<SearchImagesModel>> _searchResult(BuildContext context) {
     return FutureBuilder<List<SearchImagesModel>>(
-      future: fetchImage.getTabPhotosAPI(widget.searchQuery),
+      future: fetchImage.getSearchPhotosAPI(widget.searchQuery),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
@@ -104,6 +104,7 @@ class _SearchScreenState extends State<SearchResultScreen> {
                         width: 50,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
+                          color: Colors.grey.shade300,
                           image: DecorationImage(
                             fit: BoxFit.cover,
                             image: NetworkImage(imageUrl),

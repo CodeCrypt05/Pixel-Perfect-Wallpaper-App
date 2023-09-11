@@ -46,4 +46,22 @@ class FetchImage {
       throw Exception('Failed to load images');
     }
   }
+
+  // Search Images
+  Future<List<SearchImagesModel>> getSearchPhotosAPI(String query) async {
+    final url = Uri.parse(
+        'https://api.pexels.com/v1/search?query=$query&per_page=80&page=1');
+    final headers = {"Authorization": authorization};
+
+    final response = await http.get(url, headers: headers);
+    Map<String, dynamic> data = jsonDecode(response.body);
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final photos = data['photos'] as List<dynamic>;
+      return photos.map((json) => SearchImagesModel.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load images');
+    }
+  }
 }
