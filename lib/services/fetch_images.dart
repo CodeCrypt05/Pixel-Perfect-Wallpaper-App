@@ -7,10 +7,12 @@ import 'package:pixel_perfect_wallpaper_app/models/search_images_model.dart';
 class FetchImage {
   String authorization = dotenv.env['AUTH_KEY']!;
   List<PhotosModel> photoList = [];
+  List<SearchImagesModel> photoSearchList = [];
+  final perPage = 80;
 
   Future<List<PhotosModel>> getRandomPhotosAPI() async {
     final url =
-        Uri.parse('https://api.pexels.com/v1/curated?per_page=80&page=2');
+        Uri.parse('https://api.pexels.com/v1/curated?per_page=$perPage&page=1');
     final headers = {"Authorization": authorization};
 
     final response = await http.get(url, headers: headers);
@@ -29,21 +31,25 @@ class FetchImage {
   }
 
 // Tabs Category Images
-  List<SearchImagesModel> photoSearchList = [];
-  Future<List<SearchImagesModel>> getTabPhotosAPI(String query) async {
+  Future<List<SearchImagesModel>> getTabPhotosAPI(
+      String query, int page) async {
     final url = Uri.parse(
-        'https://api.pexels.com/v1/search?query=$query&per_page=80&page=1');
+        'https://api.pexels.com/v1/search?query=$query&per_page=$perPage&page=$page');
     final headers = {"Authorization": authorization};
 
     final response = await http.get(url, headers: headers);
     Map<String, dynamic> data = jsonDecode(response.body);
+    print(data);
 
     if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      final photos = data['photos'] as List<dynamic>;
-      return photos.map((json) => SearchImagesModel.fromJson(json)).toList();
+      final searchPhotos = data['photos'];
+      photoSearchList.clear();
+      searchPhotos.forEach((element) {
+        photoSearchList.add(SearchImagesModel.fromJson(element));
+      });
+      return photoSearchList;
     } else {
-      throw Exception('Failed to load images');
+      return photoSearchList;
     }
   }
 

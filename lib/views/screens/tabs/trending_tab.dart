@@ -29,6 +29,7 @@ class _TrendingTabState extends State<TrendingTab> {
           return Container(
             margin: const EdgeInsets.symmetric(horizontal: 10),
             child: GridView.builder(
+              physics: const BouncingScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisSpacing: 13,
                 mainAxisSpacing: 10,
@@ -49,6 +50,7 @@ class _TrendingTabState extends State<TrendingTab> {
                         height: 800.0,
                         width: 50,
                         decoration: BoxDecoration(
+                          color: Colors.grey.shade300,
                           borderRadius: BorderRadius.circular(20),
                           image: DecorationImage(
                             fit: BoxFit.cover,
