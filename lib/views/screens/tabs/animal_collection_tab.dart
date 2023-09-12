@@ -53,8 +53,7 @@ class _AnimalCollectionTabState extends State<AnimalCollectionTab> {
         page++; // Increment the page count
         // Append the new images to your existing list of images
         images.addAll(newImages);
-        print("User on page");
-        print(page);
+        toast.showToast('Page No:$page');
       });
     } catch (error) {
       // Handle the error

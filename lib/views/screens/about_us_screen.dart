@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AbpoutUsScreen extends StatelessWidget {
+class AbpoutUsScreen extends StatefulWidget {
   const AbpoutUsScreen({super.key});
 
   static const String welcomeMessage =
@@ -10,6 +10,11 @@ class AbpoutUsScreen extends StatelessWidget {
   static const String aboutContent =
       'We take pride in offering a diverse selection of wallpapers that cater to different tastes and moods. Our team is dedicated to continuously expanding our library, ensuring that you always have access to the latest trends and timeless classics.';
 
+  @override
+  State<AbpoutUsScreen> createState() => _AbpoutUsScreenState();
+}
+
+class _AbpoutUsScreenState extends State<AbpoutUsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +49,7 @@ class AbpoutUsScreen extends StatelessWidget {
               child: const Column(
                 children: [
                   Text(
-                    welcomeMessage,
+                    AbpoutUsScreen.welcomeMessage,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 14),
                   ),
@@ -52,7 +57,7 @@ class AbpoutUsScreen extends StatelessWidget {
                     height: 12,
                   ),
                   Text(
-                    missionStatement,
+                    AbpoutUsScreen.missionStatement,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 14),
                   ),
@@ -60,7 +65,7 @@ class AbpoutUsScreen extends StatelessWidget {
                     height: 12,
                   ),
                   Text(
-                    aboutContent,
+                    AbpoutUsScreen.aboutContent,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 14),
                   ),
