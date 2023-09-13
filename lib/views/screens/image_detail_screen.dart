@@ -5,8 +5,11 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:pixel_perfect_wallpaper_app/widgets/show_toast.dart';
 import 'package:pixel_perfect_wallpaper_app/functions/download_wallpaper.dart';
+
+const int maxFailedLoadAttempts = 3;
 
 class ImageDetailScreen extends StatefulWidget {
   const ImageDetailScreen({super.key, required this.imageUrl});
@@ -19,6 +22,58 @@ class ImageDetailScreen extends StatefulWidget {
 class _ImageDetailScreenState extends State<ImageDetailScreen> {
   ShowToast toast = const ShowToast();
   DownloadWallpaper downloadWallpaper = DownloadWallpaper();
+  int _interstitialLoadAttempts = 0;
+  late InterstitialAd _interstitialAd;
+  bool _isInlineBannerAdLoaded = false;
+
+  // Ads Function
+  void _createInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: 'ca-app-pub-3940256099942544/1033173712',
+      request: const AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (InterstitialAd ad) {
+          _interstitialAd = ad;
+          _interstitialLoadAttempts = 0;
+        },
+        onAdFailedToLoad: (LoadAdError error) {
+          _interstitialLoadAttempts += 1;
+          if (_interstitialLoadAttempts <= maxFailedLoadAttempts) {
+            _createInterstitialAd();
+          }
+        },
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _createInterstitialAd();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _interstitialAd.dispose();
+  }
+
+  void _showInterstitialAd(String apply, BuildContext context) {
+    if (_interstitialAd != null) {
+      _interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
+          onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        ad.dispose();
+        _createInterstitialAd();
+        setWallpaper(apply, context);
+      }, onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        ad.dispose();
+        _createInterstitialAd();
+      });
+      _interstitialAd.show();
+    }
+  }
 
   // show progressbar on bottom sheet
   void _showBottomSheet(BuildContext context) {
@@ -91,7 +146,7 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
               leading: const Icon(Icons.screen_lock_portrait),
               title: const Text('Set as lock screen'),
               onTap: () {
-                setWallpaper('setLock', context);
+                _showInterstitialAd('setLock', context);
                 Navigator.pop(con);
               },
             ),
@@ -99,7 +154,7 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
               leading: const Icon(Icons.home),
               title: const Text('Set as home screen'),
               onTap: () {
-                setWallpaper('setHome', context);
+                _showInterstitialAd('setLock', context);
                 Navigator.pop(con);
               },
             ),
@@ -107,7 +162,7 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
               leading: const Icon(Icons.mobile_screen_share),
               title: const Text('Set both'),
               onTap: () {
-                setWallpaper('setBoth', context);
+                _showInterstitialAd('setLock', context);
                 Navigator.pop(con);
               },
             ),
