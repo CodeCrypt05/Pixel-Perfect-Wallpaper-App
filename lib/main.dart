@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:pixel_perfect_wallpaper_app/views/screens/home_screen.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:pixel_perfect_wallpaper_app/views/screens/splash_screen.dart';
 
 var devices = ["4F60027F3F6991DF5655BEE2900555A1"];
 Future<void> main() async {
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
         colorScheme: customColorScheme,
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }
