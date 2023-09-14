@@ -61,6 +61,7 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
   }
 
   void _showInterstitialAd(String apply, BuildContext context) {
+    // ignore: unnecessary_null_comparison
     if (_interstitialAd != null) {
       _interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
           onAdDismissedFullScreenContent: (InterstitialAd ad) {

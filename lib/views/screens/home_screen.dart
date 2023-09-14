@@ -28,19 +28,56 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
+      // appBar: AppBar(
+      //   leading: IconButton(
+      //     icon: const Icon(
+      //       Icons.menu,
+      //       size: 30.0,
+      //     ),
+      //     onPressed: () {
+      //       _scaffoldKey.currentState?.openDrawer(); // Open the drawer
+      //     },
+      //   ),
+      //   title: const Text('Pixel Perfect Wallpapers'),
+      //   centerTitle: true,
+      //   toolbarHeight: 70,
+      //   actions: [
+      //     IconButton(onPressed: () {}, icon: const Icon(Icons.nightlight))
+      //   ], // Adjust the height as needed
+      // ),
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(
-            Icons.menu,
-            size: 30.0,
+        leading: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+          child: IconButton(
+            icon: const Icon(
+              Icons.menu,
+              size: 30.0,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              _scaffoldKey.currentState?.openDrawer(); // Open the drawer
+            },
           ),
-          onPressed: () {
-            _scaffoldKey.currentState?.openDrawer(); // Open the drawer
-          },
         ),
         title: const Text('Pixel Perfect Wallpapers'),
-        toolbarHeight: 70, // Adjust the height as needed
+        centerTitle: true,
+        toolbarHeight: 70,
+        actions: [
+          Padding(
+            padding:
+                const EdgeInsets.only(right: 10.0), // Add left padding here
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.favorite,
+                size: 26.5,
+                color: Colors.red,
+              ),
+            ),
+          ),
+        ],
       ),
+
       drawer: const NavigationDrawer(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -213,11 +250,11 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         child: const Column(
           children: [
             CircleAvatar(
-              radius: 52,
+              radius: 55,
               backgroundImage: AssetImage("assets/images/logo.png"),
             ),
             SizedBox(
-              height: 10,
+              height: 12,
             ),
             Text(
               "Pixel Perfect Wallpaper",
@@ -230,8 +267,39 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         ),
       );
 
+  bool isDarkModeEnabled = false;
+
   Widget buildMenu(BuildContext context) => Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  child: const Row(
+                    children: [
+                      Icon(Icons.nightlight_outlined),
+                      SizedBox(
+                          width: 13), // Add space between the icon and text
+                      Text(
+                        'Dark Mode',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ),
+                Switch(
+                  value: isDarkModeEnabled,
+                  onChanged: (newValue) {
+                    setState(() {
+                      isDarkModeEnabled = newValue;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
           ListTile(
             leading: const Icon(Icons.star_border_outlined),
             title: const Text('Rate This App'),
@@ -251,9 +319,11 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const AbpoutUsScreen()));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AbpoutUsScreen(),
+                ),
+              );
             },
           ),
           ListTile(
