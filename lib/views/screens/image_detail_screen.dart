@@ -24,12 +24,12 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
   DownloadWallpaper downloadWallpaper = DownloadWallpaper();
   int _interstitialLoadAttempts = 0;
   late InterstitialAd _interstitialAd;
-  bool _isInlineBannerAdLoaded = false;
+  String unitId = "ca-app-pub-6785970781164788/6489525412";
 
   // Ads Function
   void _createInterstitialAd() {
     InterstitialAd.load(
-      adUnitId: 'ca-app-pub-3940256099942544/1033173712',
+      adUnitId: unitId,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {

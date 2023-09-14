@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // color: Colors.amber,
           ),
           tabs(size),
-          Expanded(
+          Flexible(
             child: displayScreens(),
           ),
         ],

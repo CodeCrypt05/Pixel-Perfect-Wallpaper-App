@@ -5,7 +5,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:pixel_perfect_wallpaper_app/views/screens/home_screen.dart';
 import 'package:device_preview/device_preview.dart';
 
-var devices = ["4F60027F3F6991DF5655BEE2900555A1"];
+// var devices = ["4F60027F3F6991DF5655BEE2900555A1"];
 Future<void> main() async {
   await dotenv.load(fileName: ".env");
 
@@ -14,9 +14,9 @@ Future<void> main() async {
   MobileAds.instance.initialize();
 
   //this function requires for test ads
-  RequestConfiguration requestConfiguration =
-      RequestConfiguration(testDeviceIds: devices);
-  MobileAds.instance.updateRequestConfiguration(requestConfiguration);
+  // RequestConfiguration requestConfiguration =
+  //     RequestConfiguration(testDeviceIds: devices);
+  // MobileAds.instance.updateRequestConfiguration(requestConfiguration);
 
   //This below function require for check device preview
   // runApp(

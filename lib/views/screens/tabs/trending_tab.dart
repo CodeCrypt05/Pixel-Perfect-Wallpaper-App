@@ -15,6 +15,7 @@ class TrendingTab extends StatefulWidget {
 class _TrendingTabState extends State<TrendingTab> {
   final OpenImage openImage = OpenImage();
   FetchImage fetchImage = FetchImage();
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<PhotosModel>>(
