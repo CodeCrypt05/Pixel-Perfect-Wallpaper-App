@@ -24,7 +24,7 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
   DownloadWallpaper downloadWallpaper = DownloadWallpaper();
   int _interstitialLoadAttempts = 0;
   late InterstitialAd _interstitialAd;
-  String unitId = "ca-app-pub-6785970781164788/6489525412";
+  String unitId = "ca-app-pub-3940256099942544/1033173712";
 
   // Ads Function
   void _createInterstitialAd() {

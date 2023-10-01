@@ -62,20 +62,6 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Pixel Perfect Wallpapers'),
         centerTitle: true,
         toolbarHeight: 70,
-        actions: [
-          Padding(
-            padding:
-                const EdgeInsets.only(right: 10.0), // Add left padding here
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.favorite,
-                size: 26.5,
-                color: Colors.red,
-              ),
-            ),
-          ),
-        ],
       ),
 
       drawer: const NavigationDrawer(),
@@ -268,6 +254,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
       );
 
   bool isDarkModeEnabled = false;
+  bool isDarkMode = false;
 
   Widget buildMenu(BuildContext context) => Column(
         children: [
@@ -294,6 +281,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   onChanged: (newValue) {
                     setState(() {
                       isDarkModeEnabled = newValue;
+                      isDarkMode = !isDarkMode;
                     });
                   },
                 ),
