@@ -9,6 +9,7 @@ import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/nature_collection
 import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/trending_tab.dart';
 import 'package:pixel_perfect_wallpaper_app/widgets/search_bar.dart';
 import 'package:pixel_perfect_wallpaper_app/widgets/show_toast.dart';
+import 'package:provider/provider.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -28,23 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
-      // appBar: AppBar(
-      //   leading: IconButton(
-      //     icon: const Icon(
-      //       Icons.menu,
-      //       size: 30.0,
-      //     ),
-      //     onPressed: () {
-      //       _scaffoldKey.currentState?.openDrawer(); // Open the drawer
-      //     },
-      //   ),
-      //   title: const Text('Pixel Perfect Wallpapers'),
-      //   centerTitle: true,
-      //   toolbarHeight: 70,
-      //   actions: [
-      //     IconButton(onPressed: () {}, icon: const Icon(Icons.nightlight))
-      //   ], // Adjust the height as needed
-      // ),
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
@@ -63,7 +47,6 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         toolbarHeight: 70,
       ),
-
       drawer: const NavigationDrawer(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -254,73 +237,72 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
       );
 
   bool isDarkModeEnabled = false;
-  bool isDarkMode = false;
 
-  Widget buildMenu(BuildContext context) => Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  child: const Row(
-                    children: [
-                      Icon(Icons.nightlight_outlined),
-                      SizedBox(
-                          width: 13), // Add space between the icon and text
-                      Text(
-                        'Dark Mode',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
-                  ),
+  Widget buildMenu(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                child: const Row(
+                  children: [
+                    Icon(Icons.nightlight_outlined),
+                    SizedBox(width: 13), // Add space between the icon and text
+                    Text(
+                      'Dark Mode',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
                 ),
-                Switch(
-                  value: isDarkModeEnabled,
-                  onChanged: (newValue) {
-                    setState(() {
-                      isDarkModeEnabled = newValue;
-                      isDarkMode = !isDarkMode;
-                    });
-                  },
-                ),
-              ],
-            ),
+              ),
+              Switch(
+                value: isDarkModeEnabled,
+                onChanged: (newValue) {
+                  setState(() {
+                    isDarkModeEnabled = newValue;
+                  });
+                },
+              ),
+            ],
           ),
-          ListTile(
-            leading: const Icon(Icons.star_border_outlined),
-            title: const Text('Rate This App'),
-            onTap: _showRatingAppDialog,
-          ),
-          ListTile(
-            leading: const Icon(Icons.share_outlined),
-            title: const Text('Share App'),
-            onTap: () {
-              Navigator.pop(context);
-              _onShare(context);
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.info_outline),
-            title: const Text('About Us'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const AbpoutUsScreen(),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.privacy_tip_outlined),
-            title: const Text('Privacy Policy'),
-            onTap: _launchURL,
-          ),
-        ],
-      );
+        ),
+        ListTile(
+          leading: const Icon(Icons.star_border_outlined),
+          title: const Text('Rate This App'),
+          onTap: _showRatingAppDialog,
+        ),
+        ListTile(
+          leading: const Icon(Icons.share_outlined),
+          title: const Text('Share App'),
+          onTap: () {
+            Navigator.pop(context);
+            _onShare(context);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.info_outline),
+          title: const Text('About Us'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AbpoutUsScreen(),
+              ),
+            );
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.privacy_tip_outlined),
+          title: const Text('Privacy Policy'),
+          onTap: _launchURL,
+        ),
+      ],
+    );
+  }
 
   // Share My app function
   void _onShare(BuildContext context) async {

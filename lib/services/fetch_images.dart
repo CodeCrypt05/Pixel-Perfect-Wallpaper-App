@@ -60,7 +60,6 @@ class FetchImage {
     final headers = {"Authorization": authorization};
 
     final response = await http.get(url, headers: headers);
-    Map<String, dynamic> data = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
