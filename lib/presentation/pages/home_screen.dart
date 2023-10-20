@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pixel_perfect_wallpaper_app/data/tabs_list.dart';
-import 'package:pixel_perfect_wallpaper_app/views/screens/about_us_screen.dart';
-import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/animal_collection_tab.dart';
-import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/art_collection_tab.dart';
-import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/creative_collection_tab.dart';
-import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/nature_collection_tab.dart';
-import 'package:pixel_perfect_wallpaper_app/views/screens/tabs/trending_tab.dart';
-import 'package:pixel_perfect_wallpaper_app/widgets/search_bar.dart';
-import 'package:pixel_perfect_wallpaper_app/widgets/show_toast.dart';
-import 'package:provider/provider.dart';
+import 'package:pixel_perfect_wallpaper_app/data/dummy_data/tabs_list.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/pages/about_us_screen.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/tabs/animal_collection_tab.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/tabs/art_collection_tab.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/tabs/creative_collection_tab.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/tabs/nature_collection_tab.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/tabs/trending_tab.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/widgets/search_bar.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/widgets/show_toast.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -241,34 +240,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   Widget buildMenu(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                child: const Row(
-                  children: [
-                    Icon(Icons.nightlight_outlined),
-                    SizedBox(width: 13), // Add space between the icon and text
-                    Text(
-                      'Dark Mode',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
-                ),
-              ),
-              Switch(
-                value: isDarkModeEnabled,
-                onChanged: (newValue) {
-                  setState(() {
-                    isDarkModeEnabled = newValue;
-                  });
-                },
-              ),
-            ],
-          ),
-        ),
         ListTile(
           leading: const Icon(Icons.star_border_outlined),
           title: const Text('Rate This App'),
@@ -324,6 +295,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   // Rate Us Function
   void _showRatingAppDialog() {
     final ratingDialog = RatingDialog(
+      starSize: 28,
       starColor: Colors.amber,
       title: const Text(
         'Are you enjoying our app?',

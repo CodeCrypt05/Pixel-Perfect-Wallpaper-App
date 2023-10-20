@@ -1,11 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:pixel_perfect_wallpaper_app/views/screens/home_screen.dart';
-import 'package:device_preview/device_preview.dart';
-import 'package:provider/provider.dart';
-import 'package:pixel_perfect_wallpaper_app/views/screens/splash_screen.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/pages/splash_screen.dart';
 
 var devices = ["4F60027F3F6991DF5655BEE2900555A1"];
 Future<void> main() async {
@@ -20,13 +16,14 @@ Future<void> main() async {
       RequestConfiguration(testDeviceIds: devices);
   MobileAds.instance.updateRequestConfiguration(requestConfiguration);
 
-  //This below function require for check device preview
+  //This below function use for check device preview
+
   // runApp(
   //   DevicePreview(
   //     enabled: !kReleaseMode,
   //     builder: ((context) => const MyApp()),
   //   ),
-  // ):
+  // );
   runApp(const MyApp());
 }
 
@@ -39,7 +36,8 @@ class MyApp extends StatelessWidget {
     const customColorScheme = ColorScheme.light(
       primary: Color.fromARGB(255, 255, 255, 255), // Example primary color
       secondary: Color.fromARGB(255, 255, 255, 255), // Example secondary color
-      background: Colors.white, // Pure white background color
+      background:
+          Color.fromARGB(255, 255, 255, 255), // Pure white background color
     );
 
     return MaterialApp(

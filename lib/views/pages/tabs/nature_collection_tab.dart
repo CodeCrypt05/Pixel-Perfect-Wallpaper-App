@@ -1,33 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/functions/open_image.dart';
+import 'package:pixel_perfect_wallpaper_app/data/models/search_images_model.dart';
+import 'package:pixel_perfect_wallpaper_app/data/services/fetch_images.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/widgets/no_internet_connection.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/widgets/shimmer_effect.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/widgets/show_toast.dart';
 
-import 'package:pixel_perfect_wallpaper_app/functions/open_image.dart';
-
-import 'package:pixel_perfect_wallpaper_app/models/search_images_model.dart';
-import 'package:pixel_perfect_wallpaper_app/services/fetch_images.dart';
-import 'package:pixel_perfect_wallpaper_app/widgets/no_internet_connection.dart';
-import 'package:pixel_perfect_wallpaper_app/widgets/shimmer_effect.dart';
-import 'package:pixel_perfect_wallpaper_app/widgets/show_toast.dart';
-
-class ArtCollectioDart extends StatefulWidget {
-  const ArtCollectioDart({super.key});
+class NatureCollectionTab extends StatefulWidget {
+  const NatureCollectionTab({super.key});
 
   @override
-  State<ArtCollectioDart> createState() => _ArtCollectioDartState();
+  State<NatureCollectionTab> createState() => _NatureCollectionTabState();
 }
 
-class _ArtCollectioDartState extends State<ArtCollectioDart> {
+class _NatureCollectionTabState extends State<NatureCollectionTab> {
   final OpenImage openImage = OpenImage();
   FetchImage fetchImage = FetchImage();
   final ScrollController _scrollController = ScrollController();
   bool isLoading = false;
   int page = 1; // Start with the first page
   List<SearchImagesModel> images = [];
-  final String tabType = 'Art';
+  final String tabType = 'Nature';
   ShowToast toast = const ShowToast();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==

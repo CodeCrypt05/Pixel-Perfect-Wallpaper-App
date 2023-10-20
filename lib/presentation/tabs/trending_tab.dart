@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pixel_perfect_wallpaper_app/functions/open_image.dart';
-import 'package:pixel_perfect_wallpaper_app/models/photos_model.dart';
-import 'package:pixel_perfect_wallpaper_app/services/fetch_images.dart';
-import 'package:pixel_perfect_wallpaper_app/widgets/no_internet_connection.dart';
-import 'package:pixel_perfect_wallpaper_app/widgets/shimmer_effect.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/functions/open_image.dart';
+import 'package:pixel_perfect_wallpaper_app/data/models/photos_model.dart';
+import 'package:pixel_perfect_wallpaper_app/data/services/fetch_images.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/widgets/no_internet_connection.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/widgets/shimmer_effect.dart';
 
 class TrendingTab extends StatefulWidget {
   const TrendingTab({super.key});

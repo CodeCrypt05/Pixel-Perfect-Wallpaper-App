@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:pixel_perfect_wallpaper_app/views/screens/serach_result_screen.dart';
-import 'package:pixel_perfect_wallpaper_app/widgets/show_toast.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/pages/serach_result_screen.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/widgets/show_toast.dart';
 
 class SearchBarWidget extends StatefulWidget {
   const SearchBarWidget({super.key});

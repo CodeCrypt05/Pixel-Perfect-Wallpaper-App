@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:pixel_perfect_wallpaper_app/models/photos_model.dart';
-import 'package:pixel_perfect_wallpaper_app/models/search_images_model.dart';
+import 'package:pixel_perfect_wallpaper_app/data/models/photos_model.dart';
+import 'package:pixel_perfect_wallpaper_app/data/models/search_images_model.dart';
 
 class FetchImage {
   String authorization = dotenv.env['AUTH_KEY']!;
@@ -10,6 +10,7 @@ class FetchImage {
   List<SearchImagesModel> photoSearchList = [];
   final perPage = 80;
 
+  //get random photos
   Future<List<PhotosModel>> getRandomPhotosAPI() async {
     final url =
         Uri.parse('https://api.pexels.com/v1/curated?per_page=$perPage&page=1');

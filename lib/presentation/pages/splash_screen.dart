@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pixel_perfect_wallpaper_app/views/screens/home_screen.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/pages/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

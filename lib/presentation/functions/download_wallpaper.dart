@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:pixel_perfect_wallpaper_app/widgets/show_toast.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/widgets/show_toast.dart';
 
 class DownloadWallpaper {
   ShowToast toast = const ShowToast();

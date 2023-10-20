@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:pixel_perfect_wallpaper_app/functions/open_image.dart';
-import 'package:pixel_perfect_wallpaper_app/models/search_images_model.dart';
-import 'package:pixel_perfect_wallpaper_app/services/fetch_images.dart';
-import 'package:pixel_perfect_wallpaper_app/widgets/no_internet_connection.dart';
-import 'package:pixel_perfect_wallpaper_app/widgets/shimmer_effect.dart';
-import 'package:pixel_perfect_wallpaper_app/widgets/show_toast.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/functions/open_image.dart';
+import 'package:pixel_perfect_wallpaper_app/data/models/search_images_model.dart';
+import 'package:pixel_perfect_wallpaper_app/data/services/fetch_images.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/widgets/no_internet_connection.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/widgets/shimmer_effect.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/widgets/show_toast.dart';
 
-class NatureCollectionTab extends StatefulWidget {
-  const NatureCollectionTab({super.key});
+class AnimalCollectionTab extends StatefulWidget {
+  const AnimalCollectionTab({super.key});
 
   @override
-  State<NatureCollectionTab> createState() => _NatureCollectionTabState();
+  State<AnimalCollectionTab> createState() => _AnimalCollectionTabState();
 }
 
-class _NatureCollectionTabState extends State<NatureCollectionTab> {
+class _AnimalCollectionTabState extends State<AnimalCollectionTab> {
   final OpenImage openImage = OpenImage();
   FetchImage fetchImage = FetchImage();
   final ScrollController _scrollController = ScrollController();
   bool isLoading = false;
   int page = 1; // Start with the first page
   List<SearchImagesModel> images = [];
-  final String tabType = 'Nature';
+  final String tabType = 'animal';
   ShowToast toast = const ShowToast();
 
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==

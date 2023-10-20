@@ -6,8 +6,8 @@ import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:pixel_perfect_wallpaper_app/widgets/show_toast.dart';
-import 'package:pixel_perfect_wallpaper_app/functions/download_wallpaper.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/functions/download_wallpaper.dart';
+import 'package:pixel_perfect_wallpaper_app/presentation/widgets/show_toast.dart';
 
 const int maxFailedLoadAttempts = 3;
 
@@ -117,13 +117,14 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
       var file = await DefaultCacheManager().getSingleFile(widget.imageUrl);
 
       // Show the progress indicator
-      _showBottomSheet(ctx);
+      // _showBottomSheet(ctx);
 
       final bool result =
           await WallpaperManager.setWallpaperFromFile(file.path, location!);
+      const CircularProgressIndicator();
 
       // Hide the progress indicator
-      Navigator.of(ctx).pop();
+      // Navigator.of(ctx).pop();
 
       if (result) {
         await toast.showToast("Wallpaper set successfully");
@@ -155,7 +156,7 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
               leading: const Icon(Icons.home),
               title: const Text('Set as home screen'),
               onTap: () {
-                _showInterstitialAd('setLock', context);
+                _showInterstitialAd('setHome', context);
                 Navigator.pop(con);
               },
             ),
@@ -163,7 +164,7 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
               leading: const Icon(Icons.mobile_screen_share),
               title: const Text('Set both'),
               onTap: () {
-                _showInterstitialAd('setLock', context);
+                _showInterstitialAd('setBoth', context);
                 Navigator.pop(con);
               },
             ),
@@ -276,41 +277,6 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
                     ),
                   ),
                 ),
-                //favorite btn
-                // GestureDetector(
-                //   child: GlassmorphicContainer(
-                //     alignment: Alignment.center,
-                //     width: 60,
-                //     height: 60,
-                //     borderRadius: 60,
-                //     blur: 2,
-                //     border: 1,
-                //     linearGradient: LinearGradient(
-                //         begin: Alignment.topLeft,
-                //         end: Alignment.bottomRight,
-                //         colors: [
-                //           const Color(0xFFffffff).withOpacity(0.1),
-                //           const Color(0xFFFFFFFF).withOpacity(0.05),
-                //         ],
-                //         stops: const [
-                //           0.1,
-                //           1,
-                //         ]),
-                //     borderGradient: LinearGradient(
-                //       begin: Alignment.topLeft,
-                //       end: Alignment.bottomRight,
-                //       colors: [
-                //         const Color(0xFFffffff).withOpacity(0.5),
-                //         const Color((0xFFFFFFFF)).withOpacity(0.5),
-                //       ],
-                //     ),
-                //     child: const Icon(
-                //       Icons.favorite,
-                //       size: 32,
-                //       color: Colors.white,
-                //     ),
-                //   ),
-                // ),
               ]),
             ),
           ),
