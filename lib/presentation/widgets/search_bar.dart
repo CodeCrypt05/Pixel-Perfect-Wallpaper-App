@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pixel_perfect_wallpaper_app/presentation/pages/serach_result_screen.dart';
@@ -51,7 +53,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     return Form(
       key: _form,
       child: Container(
-        margin: const EdgeInsets.only(left: 20, right: 20, bottom: 8),
+        margin: const EdgeInsets.only(left: 20, right: 20, bottom: 4),
         padding: const EdgeInsets.symmetric(horizontal: 20),
         height: 10,
         width: 100,
@@ -62,6 +64,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           children: [
             Expanded(
               child: TextFormField(
+                textAlign: TextAlign.start,
                 onFieldSubmitted: (String value) {
                   onSearch(context);
                   searchController.clear();
